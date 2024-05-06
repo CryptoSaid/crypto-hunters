@@ -24,24 +24,24 @@ app.get('/', async (req, res) => {
     res.send("Go to /circulating-supply");
 });
 
-// app.get('/circulating-supply', async (req, res) => {
-//     const totalSupply = await contract.totalSupply();
-//     let excludedTotal = ethers.BigNumber.from(0);
+app.get('/circulating-supply', async (req, res) => {
+    const totalSupply = await contract.totalSupply();
+    let excludedTotal = ethers.BigNumber.from(0);
 
-//     for (let address of excludedAddresses) {
-//         const balance = await contract.balanceOf(address);
-//         excludedTotal = excludedTotal.add(balance);
-//     }
+    for (let address of excludedAddresses) {
+        const balance = await contract.balanceOf(address);
+        excludedTotal = excludedTotal.add(balance);
+    }
 
-//     const circulatingSupply = totalSupply.sub(excludedTotal);
-//     const formattedCirculatingSupply = ethers.utils.formatUnits(circulatingSupply, 18);
+    const circulatingSupply = totalSupply.sub(excludedTotal);
+    const formattedCirculatingSupply = ethers.utils.formatUnits(circulatingSupply, 18);
 
-//     res.json({
-//         totalSupply: ethers.utils.formatUnits(totalSupply, 18),
-//         excludedTotal: ethers.utils.formatUnits(excludedTotal, 18),
-//         circulatingSupply: formattedCirculatingSupply
-//     });
-// });
+    res.json({
+        totalSupply: ethers.utils.formatUnits(totalSupply, 18),
+        excludedTotal: ethers.utils.formatUnits(excludedTotal, 18),
+        circulatingSupply: formattedCirculatingSupply
+    });
+});
 
 app.listen(port, () => {
     console.log(`Сервер запущений на порті ${port}`);
