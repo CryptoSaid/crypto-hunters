@@ -1,7 +1,6 @@
 const express = require('express');
 const ethers = require("ethers");
 const fs = require('fs');
-const router = express.Router();
 
 // Завантаження ABI та excluded addresses
 const contractABI = require("./abi.js");
@@ -17,7 +16,11 @@ console.log("Провайдер ініціалізовано");
 const contractAddress = '0xa236fd48f30ad4dee145652a71912189855dd575';
 const contract = new ethers.Contract(contractAddress, contractABI, provider);
 
-router.get('/circulating-supply', async (req, res) => {
+// Створення сервера
+const app = express();
+const port = process.env.PORT || 8080;
+
+app.get('/circulating-supply', async (req, res) => {
     const totalSupply = await contract.totalSupply();
     let excludedTotal = ethers.BigNumber.from(0);
 
@@ -36,4 +39,6 @@ router.get('/circulating-supply', async (req, res) => {
     });
 });
 
-module.exports = router;
+app.listen(port, () => {
+    console.log(`Сервер запущений на порті ${port}`);
+});
