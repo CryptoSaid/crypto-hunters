@@ -20,6 +20,10 @@ const contract = new ethers.Contract(contractAddress, contractABI, provider);
 const app = express();
 const port = process.env.PORT || 8080;
 
+app.get('/', async (req, res) => {
+    res.send("Go to /circulating-supply");
+});
+
 app.get('/circulating-supply', async (req, res) => {
     const totalSupply = await contract.totalSupply();
     let excludedTotal = ethers.BigNumber.from(0);

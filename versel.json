@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "./server.js",
+            "src": "./",
             "use": "@vercel/node"
         }
     ],
@@ -10,10 +10,9 @@
         {
             "src": "/(.*)",
             "dest": "/"
-        },
-        {
-            "src": "/circulating-supply",
-            "dest": "/"
         }
+    ],
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/" }
     ]
 }
