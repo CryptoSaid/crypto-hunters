@@ -17,7 +17,7 @@ const contract = new ethers.Contract(contractAddress, contractABI, provider);
 
 // Створення сервера
 const app = express();
-const port = 80;
+const port = 8080;
 
 app.get('/value/:param', async (req, res) => {
     const param = req.params.param;
