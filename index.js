@@ -1,5 +1,5 @@
 const express = require("express");
-const circulatingSupply = require("./routes/home");
+const circulatingSupply = require("./routes/circulating-supply");
 
 // Middlewares
 const app = express();
